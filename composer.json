@@ -1,0 +1,12 @@
+{
+    "name": "evo/example",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/MoliT/evohostedpayments"
+        }
+    ],
+    "require": {
+        "evo/hosted-payments": "1.0.0"
+    }
+}
