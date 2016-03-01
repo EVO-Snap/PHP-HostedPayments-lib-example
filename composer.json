@@ -3,10 +3,10 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/MoliT/evohostedpayments"
+            "url": "https://github.com/EVO-Snap/evohostedpayments"
         }
     ],
     "require": {
-        "evo/hosted-payments": "1.0.0"
+        "evo/hosted-payments": "1.0.1"
     }
 }
