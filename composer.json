@@ -3,7 +3,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/EVO-Snap/evohostedpayments"
+            "url": "https://github.com/EVO-Snap/PHP-HostedPayments-lib"
         }
     ],
     "require": {
