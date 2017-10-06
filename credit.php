@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-/* Copyright (c) 2015 EVO Payments International - All Rights Reserved.
+/* Copyright (c) 2015-2017 EVO Payments International - All Rights Reserved.
 *
 * This software and documentation is subject to and made
 * available only pursuant to the terms of an executed license
@@ -21,32 +21,43 @@
 *
 * Information in this software is subject to change without notice
 * and does not represent a commitment on the part of EVO Payments International.
-* 
-* Sample Code is for reference Only and is intended to be used for educational purposes. It's the responsibility of 
-* the software company to properly integrate into thier solution code that best meets thier production needs. 
+*
+* Sample Code is for reference Only and is intended to be used for educational purposes. It's the responsibility of
+* the software company to properly integrate into thier solution code that best meets thier production needs.
 */
 
+use EvoSnap\HostedPayments\Api;
+
+$order = Api::getOrder($_GET['merchant_order_id'], $cfg);
+
+if (isset($_GET['merchant_order_id'])) {
+    ?> <a href="?merchant_order_id=<?php echo $order->merchant_order_id; ?>">View Order</a><?php
+}
+if ('Paid' === $order->status) {
+    ?> <a href="?action=credit&merchant_order_id=<?php echo $order->merchant_order_id; ?>">Credit</a><?php
+}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="UTF-8" />
-	<title>Order <?php echo $order->merchant_order_id ?></title>
+    <meta charset="UTF-8"/>
+    <title>Order <?php echo $order->merchant_order_id; ?></title>
 </head>
 <body>
-	<div><a href="?action=new">New</a> <a href="?">Back</a> <?php if($order->status === 'Paid'){?><a href="?action=credit&merchant_order_id=<?php echo $order->merchant_order_id ?>">Credit</a><?php }?></div>
-	<h1>Pedido: <?php echo $order->merchant_order_id ?> <?php echo $order->created ?></h1>
-	<form name="HostedPayments" action="index.php" method="post">
-	<input type="hidden" name="action" value="credit" />
-	<input type="hidden" name="merchant_order_id" value="<?php echo $order->merchant_order_id ?>" />
-	<input type="hidden" name="txn_id" value="<?php echo $order->payment_transaction->txn_id ?>" />
-	<h2>Credit</h2>
-		<table>  
-			<tr>
-				<td align="left" valign="middle">Amount</td>
-				<td><input id="orderid" type="text" name="amount" value="<?php echo $order->total - $order->total_refunded ?>"/></td>
-			</tr>                      
-		</table>
-		<button type='submit'>Credit Order</button>
-	</form>  
-    </body>
+
+<h1>Order: <?php echo $order->merchant_order_id; ?> <?php echo $order->created; ?></h1>
+<form name="HostedPayments" action="index.php" method="post">
+    <input type="hidden" name="action" value="credit"/>
+    <input type="hidden" name="merchant_order_id" value="<?php echo $order->merchant_order_id; ?>"/>
+    <input type="hidden" name="txn_id" value="<?php echo $order->payment_transaction->txn_id; ?>"/>
+    <h2>Credit</h2>
+    <table>
+        <tr>
+            <td align="left" valign="middle">Amount</td>
+            <td><input id="orderid" type="text" name="amount"
+                       value="<?php echo $order->total - $order->total_refunded; ?>"/></td>
+        </tr>
+    </table>
+    <button type='submit'>Credit Order</button>
+</form>
+</body>
 </html>

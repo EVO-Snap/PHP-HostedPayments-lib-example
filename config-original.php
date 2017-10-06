@@ -29,38 +29,9 @@
  * meets their production needs.
  */
 
-use EvoSnap\HostedPayments\Api;
+use EvoSnap\HostedPayments\Model\Config;
 
-include_once(__DIR__ . '/../vendor/autoload.php');
-include_once(__DIR__ . '/../config.php');
-
-echo 'Choose a function: </p><a href="../?action=new">New Hosted Payment</a> <a href="..">Back to Main</a> <a href="?">Manage Tokens</a> <a href="?action=new">New Token</a>';
-
-if (isset($_GET['action']) && ('new' == $_GET['action'])) {
-    include('new.php');
-} elseif (isset($_POST['action']) && ('new' == $_POST['action'])) {
-    include('new_token.php');
-} elseif (isset($_GET['action']) && ('token' == $_GET['action'])) {
-    $token = Api::getToken($_GET['merchant_token_id'], $cfg);
-    include('token.php');
-} elseif (isset($_POST['action']) && ('token' == $_POST['action'])) {
-    include('process_token.php');
-} elseif (isset($_GET['merchant_token_id'])) {
-    $token = Api::getToken($_GET['merchant_token_id'], $cfg);
-    include('token_view.php');
-} else {
-    $now = new DateTime();
-    $params = [
-        'created[end]'   => $now->modify('tomorrow')->format('m/d/Y H:i:s'),
-        'created[start]' => $now->modify('-1 month')->format('m/d/Y H:i:s'),
-    ];
-
-    echo '<ul>';
-    $tokens = Api::getTokens($params, $cfg);
-
-    foreach ($tokens as $token) {
-        echo "<li><a href='?merchant_token_id=" . $token . "'>" . $token . '</a></li>';
-    }
-
-    echo '</ul>';
-}
+$cfg = new Config();
+$cfg->code = 'merchantprofile'; // Profile Code
+$cfg->key = 'key'; // Profile Key
+$cfg->environment = false; // Environment - True for Live, False for cert
