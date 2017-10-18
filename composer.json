@@ -1,5 +1,5 @@
 {
-    "name": "evo/example",
+    "name": "evo-snap/hosted-payments-example",
     "repositories": [
         {
             "type": "vcs",
@@ -7,6 +7,6 @@
         }
     ],
     "require": {
-        "evo/hosted-payments": "1.0.1"
+        "evo-snap/hosted-payments": "^1.1"
     }
 }
