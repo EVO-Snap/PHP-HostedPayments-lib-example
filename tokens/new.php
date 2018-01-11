@@ -34,7 +34,6 @@
 <meta charset="UTF-8" />
 </head>
 <body>
-	<div><p>Choose a function: </p><a href="?action=new">New Hosted Payment</a> <a href="?">Back to Main</a></div>
 	<form name="HostedPayments" action="index.php" method="post">
 	<input type="hidden" name="action" value="new" />
 	<h2>Token</h2>
