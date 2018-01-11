@@ -90,6 +90,7 @@ if ((('Paid' === $order->status) || ('Refunded' === $order->status)) && ($order-
         <td><?php echo $order->billto_country; ?></td>
     </tr>
 </table>
+<?php if (isset($order->shipto_method)) { ?>
 <h2>Shipping Address (via <?php echo $order->shipto_method; ?>) </h2>
 <table>
     <tr>
@@ -129,6 +130,7 @@ if ((('Paid' === $order->status) || ('Refunded' === $order->status)) && ($order-
         <td><?php echo $token->shipto_country; ?></td>
     </tr>
 </table>
+<?php } ?>
 <h2>Total: <?php echo $order->total; ?> <?php echo $order->currency_code; ?></h2>
 <h2>Products:</h2>
 <table border="1">

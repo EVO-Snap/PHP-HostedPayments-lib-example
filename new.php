@@ -31,7 +31,7 @@
 
 // Allow us to generate a unique order/sub number by default:
 $subscriptionNumber = $orderNumber = null;
-if ('1' == $_REQUEST['sub']) {
+if (isset($_REQUEST['sub']) && ($_REQUEST['sub'] == '1')) {
     $subscriptionNumber = 'sub' . time();
 } else {
     $orderNumber = 'order' . time();
@@ -43,7 +43,6 @@ if ('1' == $_REQUEST['sub']) {
 <meta charset="UTF-8" />
 </head>
 <body>
-	<div><p>Choose a function: </p><a href="?action=new">New Hosted Payment</a> <a href="?">Back to Main</a></div>
 	<form name="HostedPayments" action="index.php" method="post">
 	<input type="hidden" name="action" value="new" />
     <h4>Customer Information</h4>
